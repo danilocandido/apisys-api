@@ -1,0 +1,70 @@
+
+<form class="example-form" #frm="ngForm" (ngSubmit)="adicionarAluno(frm)" #myForm="ngForm">
+  <md-form-field class="example-full-width">
+    <input mdInput maxlength="20" placeholder="Nome" name="nome" [required]="true" [(ngModel)]="aluno.nome">
+  </md-form-field>
+  <md-form-field class="example-full-width">
+    <input mdInput maxlength="20" placeholder="Curso" name="curso" [(ngModel)]="aluno.curso">
+  </md-form-field>
+  <md-form-field class="example-full-width">
+    <input mdInput type="number" maxlength="6" placeholder="Matricula" name="matricula" [(ngModel)]="aluno.matricula">
+  </md-form-field><br/>
+  <md-form-field class="example-full-width">
+    <input mdInput type="number" maxlength="4" placeholder="Semestre" name="semestre" [(ngModel)]="aluno.semestre">
+  </md-form-field>
+
+  <md-select placeholder="Status" [(ngModel)]="aluno.status" name="status">
+    <md-option *ngFor="let status of statusTypes" [value]="status.value">
+      {{status.viewValue}}
+    </md-option>
+  </md-select>
+
+  <br/>
+  <button md-raised-button [disabled]="frm.invalid" color="primary">Adicionar</button>
+</form>
+
+<!-- -->
+
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="alunoDataSource">
+
+    <ng-container mdColumnDef="nome">
+      <md-header-cell *mdHeaderCellDef> Nome </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> {{aluno.nome}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="curso">
+      <md-header-cell *mdHeaderCellDef> Curso </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> {{aluno.curso}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="matricula">
+      <md-header-cell *mdHeaderCellDef> Matricula </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> {{aluno.matricula}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="semestre">
+      <md-header-cell *mdHeaderCellDef> Semestre </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> {{aluno.semestre}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="status">
+      <md-header-cell *mdHeaderCellDef> Status </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> {{aluno.status}} </md-cell>
+    </ng-container>
+
+
+    <ng-container mdColumnDef="ações">
+      <md-header-cell *mdHeaderCellDef> Ações </md-header-cell>
+      <md-cell *mdCellDef="let aluno"> 
+        <button md-button color="primary" (click)="clickEdit(aluno)" (focus)="editarAluno(aluno);" >Edit</button>  
+        <button md-button color="accent" (click)="detetarAluno(aluno)" >Delete </button>  
+      </md-cell>
+    </ng-container>
+
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+
+  </md-table>
+</div>

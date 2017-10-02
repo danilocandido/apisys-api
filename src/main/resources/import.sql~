@@ -1,0 +1,1 @@
+insert into aluno (nome, curso, matricula, semestre, status) values ('maria', 'biologia', 201799, 1, 'MATRICULADO');
